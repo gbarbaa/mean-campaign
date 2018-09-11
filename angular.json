@@ -23,7 +23,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              {
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              },
+              "src/assets/sass/styles.scss"
             ],
             "scripts": []
           },
@@ -72,7 +75,10 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              {
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              },
+              "src/assets/sass/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -123,5 +129,11 @@
       }
     }
   },
-  "defaultProject": "mean-campaign"
+  "defaultProject": "mean-campaign",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "styleext": "scss"
+    }
+  }
 }

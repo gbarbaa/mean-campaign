@@ -1,0 +1,72 @@
+<div class="button-row">
+  <a mat-raised-button color="primary" [routerLink]="['/campaigns']"><mat-icon>list</mat-icon></a>
+</div>
+<form [formGroup]="campaignForm" (ngSubmit)="onFormSubmit(campaignForm.value)">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Campaign ID" formControlName="campaignid"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('campaignid').valid && campaignForm.get('campaignid').touched">Please enter Campaign ID</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Campaign Name" formControlName="campaignname"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('campaignname').valid && campaignForm.get('campaignname').touched">Please enter Campaign Name</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Ad ID" formControlName="adid"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('adid').valid && campaignForm.get('adid').touched">Please enter Ad ID</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Ad Name" formControlName="adname"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('adname').valid && campaignForm.get('adname').touched">Please enter Ad Name</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Creative ID" formControlName="creativeid"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('creativeid').valid && campaignForm.get('creativeid').touched">Please enter Creative ID</span>
+    </mat-error>
+  </mat-form-field>
+    
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Campaign Exp. Date" formControlName="campaignexpdate"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('campaignexpdate').valid && campaignForm.get('campaignexpdate').touched">Please enter Campaign Exp. Date</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Ad Exp. Date" formControlName="adexpdate"
+           [errorStateMatcher]="matcher"></textarea>
+    <mat-error>
+      <span *ngIf="!campaignForm.get('adexpdate').valid && campaignForm.get('adexpdate').touched">Please enter Ad Exp. Date</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Publisher" formControlName="publisher"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('publisher').valid && campaignForm.get('publisher').touched">Please enter Publisher</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Campaign/Ad Type" formControlName="campaignadtype"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('campaignadtype').valid && campaignForm.get('campaignadtype').touched">Please select Campaign/Ad Type</span>
+    </mat-error>
+  </mat-form-field>
+  <div class="button-row">
+    <button type="submit" [disabled]="!campaignForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+  </div>
+</form>
