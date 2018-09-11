@@ -20,8 +20,8 @@ export class CampaignComponent implements OnInit {
   public valueSearch: string = '';
   public search: string = null;
   campaigns: any;
-  groupedCampaignIds = [];
-  groupedCampaigns = [];
+  groupedCampaignIds: any;
+  groupedCampaigns: any;
 
   displayedColumns = ['campaignname', 'adname', 'campaignexpdate', 'adexpdate'];
   dataSource = new CampaignDataSource(this.api);
