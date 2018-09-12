@@ -14,10 +14,7 @@ var passport = require('passport');
 var config = require('./config/database');
 mongoose.connect(config.database, { promiseLibrary: require('bluebird') })
   .then(() =>  console.log('connection successful'))
-  .catch((err) => {
-    console.error(err)
-    return Observable.throw(err);
-  });
+  .catch((err) => console.error(err));
 
 app.use(logger('dev'));
 app.use(express.json());

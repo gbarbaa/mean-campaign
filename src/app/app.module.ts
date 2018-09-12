@@ -24,6 +24,7 @@ import { CampaignEditComponent } from './campaign-edit/campaign-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 const appRoutes: Routes = [
   {
@@ -59,6 +60,9 @@ const appRoutes: Routes = [
   { path: '',
     redirectTo: '/login',
     pathMatch: 'full'
+  },
+  { path: '**',
+  component: NotfoundComponent,
   }
 ];
 
@@ -70,7 +74,8 @@ const appRoutes: Routes = [
     CampaignCreateComponent,
     CampaignEditComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    NotfoundComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes,
