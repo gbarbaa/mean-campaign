@@ -2,6 +2,7 @@
   <a mat-raised-button color="primary" (click)="campaignDetails()"><mat-icon>show</mat-icon></a>
 </div>
 <form [formGroup]="campaignForm" (ngSubmit)="onFormSubmit(campaignForm.value)">
+    <div class="col-md-6">
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Campaign ID" formControlName="campaignid"
            [errorStateMatcher]="matcher">
@@ -65,6 +66,93 @@
       <span *ngIf="!campaignForm.get('publisher').valid && campaignForm.get('publisher').touched">Please enter Publisher</span>
     </mat-error>
   </mat-form-field>
+
+
+</div>
+<div class="col-md-6">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="creativeobject" formControlName="creativeobject" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('creativeobject').valid && campaignForm.get('creativeobject').touched">Please select creative object</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="vehicleid" formControlName="vehicleid" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('vehicleid').valid && campaignForm.get('vehicleid').touched">Please select vehicle id</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="vehiclevin" formControlName="vehiclevin" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('vehiclevin').valid && campaignForm.get('vehiclevin').touched">Please select vehicle vin</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="vehiclemake" formControlName="vehiclemake" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('vehiclemake').valid && campaignForm.get('vehiclemake').touched">Please select vehicle make</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="vehiclemodel" formControlName="vehiclemodel" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('vehiclemodel').valid && campaignForm.get('vehiclemodel').touched">Please select vehicle model</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="vehicleyear" formControlName="vehicleyear" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('vehicleyear').valid && campaignForm.get('vehicleyear').touched">Please select vehicle year</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="vehiclecolor" formControlName="vehiclecolor" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('vehiclecolor').valid && campaignForm.get('vehiclecolor').touched">Please select vehicle color</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="vehiclebody" formControlName="vehiclebody" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('vehiclebody').valid && campaignForm.get('vehiclebody').touched">Please select vehicle body</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="vehicleodometer" formControlName="vehicleodometer" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('vehicleodometer').valid && campaignForm.get('vehicleodometer').touched">Please select vehicle odometer</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="vehicletitle" formControlName="vehicletitle" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('vehicletitle').valid && campaignForm.get('vehicletitle').touched">Please select vehicle title</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="vehicleprice" formControlName="vehicleprice" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('vehicleprice').valid && campaignForm.get('vehicleprice').touched">Please select vehicle price</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="pacode" formControlName="pacode" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('pacode').valid && campaignForm.get('pacode').touched">Please select PA Code</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="postalcode" formControlName="postalcode" [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!campaignForm.get('postalcode').valid && campaignForm.get('postalcode').touched">Please select Postal code</span>
+    </mat-error>
+  </mat-form-field>
+
+</div>
 
   <div class="button-row">
     <button type="submit" [disabled]="!campaignForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>

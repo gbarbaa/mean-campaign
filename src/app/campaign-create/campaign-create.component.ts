@@ -24,7 +24,19 @@ export class CampaignCreateComponent implements OnInit {
   campaignexpdate:string='';
   adexpdate:string='';
   publisher:string='';
-
+  creativeobject: Object='';
+    vehicleid: String='';
+    vehiclevin: String='';
+    vehiclemake: String='';
+    vehiclemodel: String='';
+    vehicleyear: String='';
+    vehiclecolor: String='';
+    vehiclebody: String='';
+    vehicleodometer: String='';
+    vehicletitle: String='';
+    vehicleprice: String='';
+    pacode: String='';
+    postalcode: String='';
   constructor(private http: HttpClient, private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
 
 
@@ -38,6 +50,20 @@ export class CampaignCreateComponent implements OnInit {
       'creativeid' : [null, Validators.required],
       'campaignadtype' : [null, Validators.required],
       'campaignexpdate' : [null, Validators.required],
+      'creativeobject' :  [null],
+      'vehicleid':  [null],
+      'vehiclevin':  [null],
+      'vehiclemake':  [null, Validators.required],
+      'vehiclemodel':  [null, Validators.required],
+      'vehicleyear':  [null, Validators.required],
+      'vehiclecolor':  [null, Validators.required],
+      'vehiclebody':  [null],
+      'vehicleodometer':  [null],
+      'vehicletitle': [null],
+      'vehicleprice': [null],
+      'pacode': [null, Validators.required],
+      'postalcode': [null, Validators.required],
+        
       'adexpdate' : [null, Validators.required],
       'publisher' : [null, Validators.required]
     }, err => {

@@ -91,7 +91,8 @@
                       <div class="panel-body">
                         <div class="panel-project-heading active" *ngFor="let campaign of groupedCampaigns[key]">
                           <section class="panel-project-content" >
-                            <div>
+                            <a [routerLink]="['/campaign-details/', campaign._id]">
+                            <div >
                               <span class="fa fa-adn" style="flex: 18%"></span>
                               <span class="text campaign-subtitle" style="display: inline;">{{campaign.adname}}</span>
                             </div>
@@ -102,7 +103,7 @@
                             <div>
                               <span class="text campaign-title" style="flex: 18%">{{campaign.adexpdate}}</span>
                             </div>
-
+                          </a>
                           </section>
 
                           <section href="#" class="panel-project-trash active fa fa-trash-o fa-1bx red">
@@ -142,7 +143,7 @@
             <div class="row" style="margin-left: 0;">
               <div class="col-md-10">
                 <div class="row">
-                  {{groupedCampaigns[key].campaignname}}
+              
                   <input type="text" name="CampaignName" id="CampaignName" placeholder="Campaign Name" class="col-md-6 pull-left input-text"
                     required >
                   <input type="text" name="AdName" id="AdName" placeholder="Ad Name" class="col-md-5 pull-right input-text" required>

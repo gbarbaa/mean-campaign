@@ -20,7 +20,7 @@ export class CampaignDetailComponent implements OnInit {
   getCampaignDetails(id) {
     this.api.getCampaign(id)
       .subscribe(data => {
-        console.log(data);
+        console.log("gcd: ", data);
         this.campaign = data;
       });
   }

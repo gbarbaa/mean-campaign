@@ -8,6 +8,7 @@
   </mat-card-header>
   <mat-card-content>
     <dl>
+      <div class="col-md-6">
       <dt>Campaign Name:</dt>
       <dd>{{campaign.campaignname}}</dd>
       <dt>Ad Name:</dt>
@@ -22,6 +23,33 @@
       <dd>{{campaign.creativeid}}</dd>
       <dt>Update Date:</dt>
       <dd>{{campaign.updated_date | date}}</dd>
+    </div>
+    <div class="col-md-6">
+        <dt>Vehicle Id:</dt>
+        <dd>{{campaign.vehicleid}}</dd>
+        <dt>Vehicle VIN:</dt>
+        <dd>{{campaign.vehiclevin}}</dd>
+        <dt>Vehicle Make:</dt>
+        <dd>{{campaign.vehiclemake}}</dd>
+        <dt>Vehicle Model:</dt>
+        <dd>{{campaign.vehiclemodel}}</dd>
+        <dt>Vehicle Year:</dt>
+        <dd>{{campaign.vehicleyear}}</dd>
+        <dt>Vehicle Color:</dt>
+        <dd>{{campaign.vehiclecolor}}</dd>
+        <dt>Vehicle Body:</dt>
+        <dd>{{campaign.vehiclebody}}</dd>
+        <dt>Vehicle Ododmeter:</dt>
+        <dd>{{campaign.vehicleodometer}}</dd>
+        <dt>Vehicle Title:</dt>
+        <dd>{{campaign.vehicletitle}}</dd>
+        <dt>Vehicle Price:</dt>
+        <dd>{{campaign.vehicleprice}}</dd>
+        <dt>PA Code:</dt>
+        <dd>{{campaign.pacode}}</dd>
+        <dt>Postal Code:</dt>
+        <dd>{{campaign.postalcode}}</dd>
+      </div>
     </dl>
   </mat-card-content>
   <mat-card-actions>

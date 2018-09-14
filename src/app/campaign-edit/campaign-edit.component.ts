@@ -9,9 +9,8 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
   styleUrls: ['./campaign-edit.component.scss']
 })
 export class CampaignEditComponent implements OnInit {
-
   campaignForm: FormGroup;
-  id:string = '';
+  id:string='';
   campaignid:string='';
   campaignname:string='';
   adid:string='';
@@ -21,6 +20,19 @@ export class CampaignEditComponent implements OnInit {
   campaignexpdate:string='';
   adexpdate:string='';
   publisher:string='';
+  creativeobject: Object='';
+    vehicleid: String='';
+    vehiclevin: String='';
+    vehiclemake: String='';
+    vehiclemodel: String='';
+    vehicleyear: String='';
+    vehiclecolor: String='';
+    vehiclebody: String='';
+    vehicleodometer: String='';
+    vehicletitle: String='';
+    vehicleprice: String='';
+    pacode: String='';
+    postalcode: String='';
 
   constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) { }
 
@@ -34,6 +46,20 @@ export class CampaignEditComponent implements OnInit {
       'creativeid' : [null, Validators.required],
       'campaignadtype' : [null, Validators.required],
       'campaignexpdate' : [null, Validators.required],
+      'creativeobject' :  [null],
+      'vehicleid':  [null],
+      'vehiclevin':  [null],
+      'vehiclemake':  [null, Validators.required],
+      'vehiclemodel':  [null, Validators.required],
+      'vehicleyear':  [null, Validators.required],
+      'vehiclecolor':  [null, Validators.required],
+      'vehiclebody':  [null],
+      'vehicleodometer':  [null],
+      'vehicletitle': [null],
+      'vehicleprice': [null],
+      'pacode': [null, Validators.required],
+      'postalcode': [null, Validators.required],
+        
       'adexpdate' : [null, Validators.required],
       'publisher' : [null, Validators.required]
     });
@@ -51,7 +77,20 @@ export class CampaignEditComponent implements OnInit {
         campaignadtype: data.campaignadtype,
         campaignexpdate: data.campaignexpdate,
         adexpdate: data.adexpdate,
-        publisher: data.publisher
+        publisher: data.publisher,
+        creativeobject: data.creativeobject,
+        vehicleid: data.vehicleid,
+        vehiclevin: data.vehiclevin,
+        vehiclemake: data.vehiclemake,
+        vehiclemodel: data.vehiclemodel,
+        vehicleyear: data.vehicleyear,
+        vehiclecolor: data.vehiclecolor,
+        vehiclebody: data.vehiclebody,
+        vehicleodometer: data.vehicleodometer,
+        vehicletitle: data.vehicletitle,
+        vehicleprice: data.vehicleprice,
+        pacode: data.pacode,
+        postalcode: data.postalcode
       });
     });
   }

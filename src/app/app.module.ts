@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { AdDetailComponent } from './ad-detail/ad-detail.component';
 
 const appRoutes: Routes = [
   {
@@ -57,6 +58,11 @@ const appRoutes: Routes = [
     component: CampaignEditComponent,
     data: { title: 'Edit Campaign' }
   },
+  {
+    path: 'getcreativeid/:creativeid',
+    component: AdDetailComponent,
+    data: { title: 'Ad Detail by CreativeID' }
+  },
   { path: '',
     redirectTo: '/login',
     pathMatch: 'full'
@@ -75,7 +81,8 @@ const appRoutes: Routes = [
     CampaignEditComponent,
     LoginComponent,
     SignupComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    AdDetailComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes,

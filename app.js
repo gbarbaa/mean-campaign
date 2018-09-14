@@ -21,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist/mean-campaign')));
 app.use('/', express.static(path.join(__dirname, 'dist/mean-campaign')));
+app.use('/getcreativeid/:creativeid', express.static(path.join(__dirname, 'dist/mean-campaign')));
 app.use(passport.initialize());
 app.use('/api', apiRouter);
 
