@@ -143,6 +143,18 @@
         <span *ngIf="!campaignForm.get('postalcode').valid && campaignForm.get('postalcode').touched">Please select Postal code</span>
       </mat-error>
     </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="disclaimer 1" formControlName="disclaimer1" [errorStateMatcher]="matcher">
+      <mat-error>
+        <span *ngIf="!campaignForm.get('disclaimer[0]').valid && campaignForm.get('disclaimer[0]').touched">Please enter disclaimer 1</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="disclaimer 1" formControlName="disclaimer1" [errorStateMatcher]="matcher">
+      <mat-error>
+        <span *ngIf="!campaignForm.get('disclaimer[1]').valid && campaignForm.get('disclaimer[1]').touched">Please enter disclaimer 1</span>
+      </mat-error>
+    </mat-form-field>
 
   </div>
   <div class="button-row">

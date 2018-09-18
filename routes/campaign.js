@@ -9,8 +9,6 @@ var User = require("../models/User");
 var Campaign = require('../models/Campaign');
 
 
-
-
 /* USER SIGNUP */
 router.post('/signup', function(req, res) {
   if (!req.body.username || !req.body.password) {

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../environments/environment';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
 
-//const httpOptions = {
-//  headers: new HttpHeaders({'Content-Type': 'application/json'})
-//};
 
 let httpOptions = {
   headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
@@ -18,7 +16,9 @@ const apiUrl = "/api";
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
 
 private handleError(error: HttpErrorResponse) {
@@ -42,20 +42,20 @@ private extractData(res: Response) {
 }
 
 getCampaigns(): Observable<any> {
-  return this.http.get(apiUrl, httpOptions).pipe(
+  return this.httpClient.get(apiUrl, httpOptions).pipe(
     map(this.extractData),
     catchError(this.handleError));
 }
 
 getCampaign(id: string): Observable<any> {
   const url = `${apiUrl}/${id}`;
-  return this.http.get(url, httpOptions).pipe(
+  return this.httpClient.get(url, httpOptions).pipe(
     map(this.extractData),
     catchError(this.handleError));
 }
 
 postCampaign(data): Observable<any> {
-  return this.http.post(apiUrl, data, httpOptions)
+  return this.httpClient.post(apiUrl, data, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
@@ -63,7 +63,7 @@ postCampaign(data): Observable<any> {
 
 updateCampaign(id, data): Observable<any> {
   const url = `${apiUrl}/${id}`;
-  return this.http.put(url, data, httpOptions)
+  return this.httpClient.put(url, data, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
@@ -71,10 +71,12 @@ updateCampaign(id, data): Observable<any> {
 
 deleteCampaign(id: string): Observable<{}> {
   const url = `${apiUrl}/${id}`;
-  return this.http.delete(url, httpOptions)
+  return this.httpClient.delete(url, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
 }
+
+
 
 }
