@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var CampaignSchema = new Schema({
     dealerid: String,
-    dealername: String,
+    dealerName: String,
     creativeid: String,
     campaignid: String,
     adid:String,
@@ -24,7 +24,7 @@ var CampaignSchema = new Schema({
     vehicletitle: String,
     vehicleprice: String,
     pacode: String,
-    postalcode: String,
+    postalCode: String,
     publisher: String,
     disclaimers: Array,
     updated_date: { type: Date, default: Date.now }

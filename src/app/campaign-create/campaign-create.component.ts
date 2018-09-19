@@ -13,7 +13,8 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
   styleUrls: ['./campaign-create.component.scss']
 })
 export class CampaignCreateComponent implements OnInit {
-
+  dealerid: String='';
+  dealerName: String='';
   campaignForm: FormGroup;
   campaignid:string='';
   campaignname:string='';
@@ -36,13 +37,16 @@ export class CampaignCreateComponent implements OnInit {
     vehicletitle: String='';
     vehicleprice: String='';
     pacode: String='';
-    postalcode: String='';
+    postalCode: String='';
+    
   constructor(private http: HttpClient, private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
 
 
   ngOnInit() {
 
     this.campaignForm = this.formBuilder.group({
+      'dealerid' : [null],
+      'dealerName' : [null],
       'campaignid' : [null, Validators.required],
       'campaignname' : [null, Validators.required],
       'adid' : [null, Validators.required],
@@ -62,8 +66,7 @@ export class CampaignCreateComponent implements OnInit {
       'vehicletitle': [null],
       'vehicleprice': [null],
       'pacode': [null, Validators.required],
-      'postalcode': [null, Validators.required],
-        
+      'postalCode': [null, Validators.required],
       'adexpdate' : [null, Validators.required],
       'publisher' : [null, Validators.required]
     }, err => {

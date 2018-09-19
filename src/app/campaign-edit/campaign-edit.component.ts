@@ -11,6 +11,8 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 export class CampaignEditComponent implements OnInit {
   campaignForm: FormGroup;
   id:string='';
+  dealerid: string='';
+  dealerName: string='';
   campaignid:string='';
   campaignname:string='';
   adid:string='';
@@ -32,13 +34,15 @@ export class CampaignEditComponent implements OnInit {
     vehicletitle: String='';
     vehicleprice: String='';
     pacode: String='';
-    postalcode: String='';
-
+    postalCode: String='';
+    
   constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.getCampaign(this.route.snapshot.params['id']);
     this.campaignForm = this.formBuilder.group({
+      'dealerid' : [null],
+      'dealerName' : [null],
       'campaignid' : [null, Validators.required],
       'campaignname' : [null, Validators.required],
       'adid' : [null, Validators.required],
@@ -58,8 +62,7 @@ export class CampaignEditComponent implements OnInit {
       'vehicletitle': [null],
       'vehicleprice': [null],
       'pacode': [null, Validators.required],
-      'postalcode': [null, Validators.required],
-        
+      'postalCode': [null, Validators.required],
       'adexpdate' : [null, Validators.required],
       'publisher' : [null, Validators.required]
     });
@@ -69,6 +72,8 @@ export class CampaignEditComponent implements OnInit {
     this.api.getCampaign(id).subscribe(data => {
       this.id = data._id;
       this.campaignForm.setValue({
+        dealerid: data.dealerid,
+        dealerName: data.dealerName,
         campaignid: data.campaignid,
         campaignname: data.campaignname,
         adid: data.adid,
@@ -90,7 +95,7 @@ export class CampaignEditComponent implements OnInit {
         vehicletitle: data.vehicletitle,
         vehicleprice: data.vehicleprice,
         pacode: data.pacode,
-        postalcode: data.postalcode
+        postalCode: data.postalCode
       });
     });
   }
