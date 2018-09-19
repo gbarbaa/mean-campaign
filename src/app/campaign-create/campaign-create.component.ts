@@ -13,9 +13,9 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
   styleUrls: ['./campaign-create.component.scss']
 })
 export class CampaignCreateComponent implements OnInit {
+  campaignForm: FormGroup;
   dealerid: String='';
   dealerName: String='';
-  campaignForm: FormGroup;
   campaignid:string='';
   campaignname:string='';
   adid:string='';
@@ -38,6 +38,7 @@ export class CampaignCreateComponent implements OnInit {
     vehicleprice: String='';
     pacode: String='';
     postalCode: String='';
+   
     
   constructor(private http: HttpClient, private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
 
@@ -54,6 +55,8 @@ export class CampaignCreateComponent implements OnInit {
       'creativeid' : [null, Validators.required],
       'campaignadtype' : [null, Validators.required],
       'campaignexpdate' : [null, Validators.required],
+      'adexpdate' : [null, Validators.required],
+      'publisher' : [null, Validators.required],
       'creativeobject' :  [null],
       'vehicleid':  [null],
       'vehiclevin':  [null],
@@ -66,9 +69,8 @@ export class CampaignCreateComponent implements OnInit {
       'vehicletitle': [null],
       'vehicleprice': [null],
       'pacode': [null, Validators.required],
-      'postalCode': [null, Validators.required],
-      'adexpdate' : [null, Validators.required],
-      'publisher' : [null, Validators.required]
+      'postalCode': [null, Validators.required]
+
     }, err => {
         if(err.status === 401) {
           this.router.navigate(['login']);
