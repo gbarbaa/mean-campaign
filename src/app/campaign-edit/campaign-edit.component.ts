@@ -23,11 +23,11 @@ export class CampaignEditComponent implements OnInit {
   creativeobject: Object='';
     vehicleid: String='';
     vehiclevin: String='';
-    vehiclemake: String='';
-    vehiclemodel: String='';
-    vehicleyear: String='';
-    vehiclecolor: String='';
-    vehiclebody: String='';
+    make: String='';
+    model: String='';
+    year: String='';
+    color: String='';
+    trim: String='';
     vehicleodometer: String='';
     vehicletitle: String='';
     vehicleprice: String='';
@@ -49,11 +49,11 @@ export class CampaignEditComponent implements OnInit {
       'creativeobject' :  [null],
       'vehicleid':  [null],
       'vehiclevin':  [null],
-      'vehiclemake':  [null, Validators.required],
-      'vehiclemodel':  [null, Validators.required],
-      'vehicleyear':  [null, Validators.required],
-      'vehiclecolor':  [null, Validators.required],
-      'vehiclebody':  [null],
+      'make':  [null, Validators.required],
+      'model':  [null, Validators.required],
+      'year':  [null, Validators.required],
+      'color':  [null, Validators.required],
+      'trim':  [null],
       'vehicleodometer':  [null],
       'vehicletitle': [null],
       'vehicleprice': [null],
@@ -81,11 +81,11 @@ export class CampaignEditComponent implements OnInit {
         creativeobject: data.creativeobject,
         vehicleid: data.vehicleid,
         vehiclevin: data.vehiclevin,
-        vehiclemake: data.vehiclemake,
-        vehiclemodel: data.vehiclemodel,
-        vehicleyear: data.vehicleyear,
-        vehiclecolor: data.vehiclecolor,
-        vehiclebody: data.vehiclebody,
+        make: data.make,
+        model: data.model,
+        year: data.year,
+        color: data.color,
+        trim: data.trim,
         vehicleodometer: data.vehicleodometer,
         vehicletitle: data.vehicletitle,
         vehicleprice: data.vehicleprice,

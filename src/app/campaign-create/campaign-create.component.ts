@@ -27,11 +27,11 @@ export class CampaignCreateComponent implements OnInit {
   creativeobject: Object='';
     vehicleid: String='';
     vehiclevin: String='';
-    vehiclemake: String='';
-    vehiclemodel: String='';
-    vehicleyear: String='';
-    vehiclecolor: String='';
-    vehiclebody: String='';
+    make: String='';
+    model: String='';
+    year: String='';
+    color: String='';
+    trim: String='';
     vehicleodometer: String='';
     vehicletitle: String='';
     vehicleprice: String='';
@@ -53,11 +53,11 @@ export class CampaignCreateComponent implements OnInit {
       'creativeobject' :  [null],
       'vehicleid':  [null],
       'vehiclevin':  [null],
-      'vehiclemake':  [null, Validators.required],
-      'vehiclemodel':  [null, Validators.required],
-      'vehicleyear':  [null, Validators.required],
-      'vehiclecolor':  [null, Validators.required],
-      'vehiclebody':  [null],
+      'make':  [null, Validators.required],
+      'model':  [null, Validators.required],
+      'year':  [null, Validators.required],
+      'color':  [null, Validators.required],
+      'trim':  [null],
       'vehicleodometer':  [null],
       'vehicletitle': [null],
       'vehicleprice': [null],

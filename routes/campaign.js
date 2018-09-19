@@ -63,7 +63,7 @@ router.get('/',  passport.authenticate('jwt', { session: false}),  function(req,
     res.json(products);
   });
 } else {
-  return res.status(403).send({success: false, msg: 'Unauthorized.'});
+  return res.status(403).send({success: false, msg: 'Unauthorized msg1.'});
 }
 });
 
@@ -85,7 +85,7 @@ router.post('/',  passport.authenticate('jwt', { session: false}), function(req,
     res.json(post);
   });
 } else {
-  return res.status(403).send({success: false, msg: 'Unauthorized.'});
+  return res.status(403).send({success: false, msg: 'Unauthorized msg2.'});
 }
 });
 
