@@ -38,7 +38,8 @@ export class CampaignCreateComponent implements OnInit {
     vehicleprice: String='';
     pacode: String='';
     postalCode: String='';
-   
+  disclaimers: String='';
+     
     
   constructor(private http: HttpClient, private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
 
@@ -69,7 +70,8 @@ export class CampaignCreateComponent implements OnInit {
       'vehicletitle': [null],
       'vehicleprice': [null],
       'pacode': [null, Validators.required],
-      'postalCode': [null, Validators.required]
+      'postalCode': [null, Validators.required],
+           'disclaimers': [null],
 
     }, err => {
         if(err.status === 401) {
