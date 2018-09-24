@@ -26,7 +26,8 @@ var CampaignSchema = new Schema({
     pacode: String,
     postalCode: String,
     publisher: String,
-    disclaimers: Array,
+    disclaimer1: String,
+    disclaimer2: String,
     updated_date: { type: Date, default: Date.now }
   });
 
