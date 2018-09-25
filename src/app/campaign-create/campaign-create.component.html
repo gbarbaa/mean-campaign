@@ -1,165 +1,392 @@
-<div class="button-row">
-  <a mat-raised-button color="primary" [routerLink]="['/campaigns']">
-    <mat-icon>list</mat-icon>
-  </a>
-</div>
-<form [formGroup]="campaignForm" (ngSubmit)="onFormSubmit(campaignForm.value)">
-  <div class="col-md-6">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Campaign ID" formControlName="campaignid" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('campaignid').valid && campaignForm.get('campaignid').touched">Please enter Campaign ID</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Campaign Name" formControlName="campaignname" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('campaignname').valid && campaignForm.get('campaignname').touched">Please enter Campaign Name</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Ad ID" formControlName="adid" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('adid').valid && campaignForm.get('adid').touched">Please enter Ad ID</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Ad Name" formControlName="adname" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('adname').valid && campaignForm.get('adname').touched">Please enter Ad Name</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Creative ID" formControlName="creativeid" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('creativeid').valid && campaignForm.get('creativeid').touched">Please enter Creative ID</span>
-      </mat-error>
-    </mat-form-field>
+<header id="top">
 
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Campaign Exp. Date" formControlName="campaignexpdate" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('campaignexpdate').valid && campaignForm.get('campaignexpdate').touched">Please enter Campaign Exp. Date</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Ad Exp. Date" formControlName="adexpdate" [errorStateMatcher]="matcher"></textarea>
-      <mat-error>
-        <span *ngIf="!campaignForm.get('adexpdate').valid && campaignForm.get('adexpdate').touched">Please enter Ad Exp. Date</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Publisher" formControlName="publisher" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('publisher').valid && campaignForm.get('publisher').touched">Please enter Publisher</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Campaign/Ad Type" formControlName="campaignadtype" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('campaignadtype').valid && campaignForm.get('campaignadtype').touched">Please select Campaign/Ad Type</span>
-      </mat-error>
-    </mat-form-field>
+  <div class="navbar-fixed-top" role="navigation">
+      <div class="container header ">
+          <nav role="navigation" aria-labelledby="block-shopmenu-menu" id="block-shopmenu">
+              <ul class="menu-shop-menu">
+                  <li class="menu-shop-menu__subitem">
+                      <a href="#" class="menu-link menu-shop-menu__link">Change Dealer</a>
+                  </li>
+                  <li class="menu-shop-menu__subitem">
+                      <a href="#" class="menu-link menu-shop-menu__link" (click)="logout()">Logout</a>
+                  </li>
+              </ul>
+          </nav>
+      </div>
+      <div class="navbar container no-container">
+          <!-- Navbar Header -->
+
+          <div class="navbar-header">
+              <!-- Logo -->
+              <a class="navbar-brand" href="#">
+                  <img src="../assets/images/fd-horz-logo.png" alt="Ford Direct" class="logo">
+              </a>
+          </div>
+
+      </div>
   </div>
-  <div class="col-md-6">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="creativeobject" formControlName="creativeobject" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('creativeobject').valid && campaignForm.get('creativeobject').touched">Please select creative object</span>
-      </mat-error>
-    </mat-form-field>
+</header>
+<!-- Header Ends -->
 
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="vehicleid" formControlName="vehicleid" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('vehicleid').valid && campaignForm.get('vehicleid').touched">Please select vehicle id</span>
-      </mat-error>
-    </mat-form-field>
+<section class="container-page  blog-leftsidebar ">
+  <div class="container">
+    <div class="row" >
+      <form [formGroup]="campaignForm" (ngSubmit)="onFormSubmit(campaignForm.value)">
+      <!-- Left Part Sidebar -->
+      <div class="col-md-4 col-sm-4">
+        <!-- Sidebar Begins -->
+        <div class="sidebar">
+          <div class="dealer-logo">
 
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="vehiclevin" formControlName="vehiclevin" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('vehiclevin').valid && campaignForm.get('vehiclevin').touched">Please select vehicle vin</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="make" formControlName="make" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('make').valid && campaignForm.get('make').touched">Please select vehicle make</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="model" formControlName="model" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('model').valid && campaignForm.get('model').touched">Please select vehicle model</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="year" formControlName="year" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('year').valid && campaignForm.get('year').touched">Please select vehicle year</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="color" formControlName="color" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('color').valid && campaignForm.get('color').touched">Please select vehicle color</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="trim" formControlName="trim" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('trim').valid && campaignForm.get('trim').touched">Please select vehicle body</span>
-      </mat-error>
-    </mat-form-field>
+            <img src="../../assets/images/1.jpg" alt="logo dealer" class="img-responsive pull-left blog-image">
+          </div>
 
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="vehicleodometer" formControlName="vehicleodometer" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('vehicleodometer').valid && campaignForm.get('vehicleodometer').touched">Please select vehicle odometer</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="vehicletitle" formControlName="vehicletitle" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('vehicletitle').valid && campaignForm.get('vehicletitle').touched">Please select vehicle title</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="vehicleprice" formControlName="vehicleprice" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('vehicleprice').valid && campaignForm.get('vehicleprice').touched">Please select vehicle price</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="pacode" formControlName="pacode" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('pacode').valid && campaignForm.get('pacode').touched">Please select PA Code</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="postalCode" formControlName="postalCode" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('postalCode').valid && campaignForm.get('postalCode').touched">Please select Postal code</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="disclaimer 1" formControlName="disclaimer1" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('disclaimers[0]').valid && campaignForm.get('disclaimers[0]').touched">Please enter disclaimer 1</span>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="disclaimer 1" formControlName="disclaimer1" [errorStateMatcher]="matcher">
-      <mat-error>
-        <span *ngIf="!campaignForm.get('disclaimers[1]').valid && campaignForm.get('disclaimers[1]').touched">Please enter disclaimer 2</span>
-      </mat-error>
-    </mat-form-field>
 
+          <!-- Categories -->
+          <div class="categories animated fadeInUp visible" data-animation="fadeInUp" data-animation-delay="300">
+            <h5>Active Projects</h5>
+            <!-- Devider -->
+            <div class="devider">
+              <div class="devider-line-h devider-line-h-sea-green animated zoomIn visible" data-animation="zoomIn" data-animation-delay="1000"></div>
+
+            </div>
+
+            <!-- Search Box Begins -->
+            <div class="input-group animated fadeInUp visible" data-animation="fadeInUp" data-animation-delay="300">
+              <input type="text" class="form-control" placeholder="Search...">
+              <span class="input-group-addon">
+                <a href="#">
+                  <i class="fa fa-1x fa-search white"></i>
+                </a>
+              </span>
+            </div>
+
+            <!-- Active Projects -->
+            <!-- Accordion Section Begins -->
+            <div class="row active-projects">
+              <!-- Accordion Left Part Begins -->
+              <div class="col-md-12 tabs accordion-after animated fadeInUp visible" data-animation="fadeInUp" data-animation-delay="500">
+                <!-- Title -->
+
+                <!-- Accordion Inner Begins -->
+                <div id="accordion" class="panel-group faq-panel accordion" data-animated="fadeInUp"  >
+
+                  <!-- Accordion campaings Begins -->
+                  <div class="panel panel-default" >
+                  
+                    <div class="panel-heading" >
+                      <!-- Title -->
+                      <div href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="panel-active-projects">
+                          <label class=""  >Campaign</label>
+                        <span class="panel-title">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Campaign Name" formControlName="campaignname" [errorStateMatcher]="matcher">
+                            <mat-error>
+                              <span *ngIf="!campaignForm.get('campaignname').valid && campaignForm.get('campaignname').touched">Please enter Campaign Name</span>
+                            </mat-error>
+                          </mat-form-field>
+                        </span>
+                      </div>
+ 
+                    </div>
+                    <div class="panel-collapse collapse in" id="collapseOne">
+                      <!-- Projects Section Begins -->
+                      <div class="panel-body">
+                        <div class="panel-project-heading active">
+                          <section class="panel-project-content" >
+                       
+                              <label class=""  aria-owns="mat-input-25">Ad</label>
+                              <div>
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Ad Name" formControlName="adname" [errorStateMatcher]="matcher">
+                                  <mat-error>
+                                    <span *ngIf="!campaignForm.get('adname').valid && campaignForm.get('adname').touched">Please enter Ad Name</span>
+                                  </mat-error>
+                                </mat-form-field>
+                              </div>
+                          </section>
+
+                          <section href="#" class="panel-project-trash active fa fa-trash-o fa-1bx red">
+
+
+                          </section>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Accordion campaings Ends -->
+
+                 
+                </div>
+                <!-- Accordion Inner Ends -->
+              </div>
+              <!-- Accordion Left Part Ends -->
+
+
+            </div>
+            <hr class="hr-style">
+            <!-- Accordion Section Ends -->
+
+          </div>
+
+        </div>
+        <!-- Sidebar Ends -->
+
+
+      </div>
+
+      
+      <!-- Right Part -->
+      <div class="main-section col-md-8 col-sm-8">
+
+          <div class="mainform" id="mainform">
+              <div class="row" style="margin-left: 0;">
+              <div class="col-md-9">
+                  <div class="row">
+
+                  <mat-form-field class="example-full-width" style="width: 50%;padding-right: 10%;">
+                    <input matInput placeholder="Campaign ID" formControlName="campaignid"
+                           [errorStateMatcher]="matcher">
+                    <mat-error>
+                      <span *ngIf="!campaignForm.get('campaignid').valid && campaignForm.get('campaignid').touched">Please enter Campaign ID</span>
+                    </mat-error>
+                  </mat-form-field>
+                    
+                  <mat-form-field class="example-full-width" style="width: 50%">
+                    <input matInput placeholder="Ad ID" formControlName="adid"
+                           [errorStateMatcher]="matcher">
+                    <mat-error>
+                      <span *ngIf="!campaignForm.get('adid').valid && campaignForm.get('adid').touched">Please enter Ad ID</span>
+                    </mat-error>
+                  </mat-form-field>
+                
+                  </div>
+                  
+                  <div class="row">
+                    <mat-form-field class="example-full-width" style="width: 50%;padding-right: 10%;">
+                      <input matInput placeholder="Campaign Exp. Date" formControlName="campaignexpdate"
+                             [errorStateMatcher]="matcher">
+                      <mat-error>
+                        <span *ngIf="!campaignForm.get('campaignexpdate').valid && campaignForm.get('campaignexpdate').touched">Please enter Campaign Exp. Date</span>
+                      </mat-error>
+                    </mat-form-field>
+                
+                    <mat-form-field class="example-full-width" style="width: 50%">
+                      <textarea matInput placeholder="Ad Exp. Date" formControlName="adexpdate"
+                             [errorStateMatcher]="matcher"></textarea>
+                      <mat-error>
+                        <span *ngIf="!campaignForm.get('adexpdate').valid && campaignForm.get('adexpdate').touched">Please enter Ad Exp. Date</span>
+                      </mat-error>
+                    </mat-form-field>
+                
+                </div>
+              </div>
+                <div class="col-md-3">
+
+                  <label class="mainOptionslbl">Search
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+
+                  <label class="mainOptionslbl">Display
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+
+                  <label class="mainOptionslbl">Social
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+
+                  <label class="mainOptionslbl">Video
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+
+                </div>
+              
+
+              <div class="">
+                <div class="devider-line-h devider-line-h-sea-green animated zoomIn visible" data-animation="zoomIn" data-animation-delay="1000"></div>
+
+              </div>
+
+              <div class="tabs-section col-md-12 pull-left tabs animated fadeInUp visible" data-animation="fadeInUp" data-animation-delay="500">
+
+                  <mat-tab-group>
+                    <mat-tab>
+                      <ng-template mat-tab-label>
+                        <mat-icon>cloud_upload</mat-icon>Creatives
+                      </ng-template>
+                      <div class="tab-content row">
+                        <div class="row">
+                          <div class="col-md-10">
+                  
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Creative ID" formControlName="creativeid" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('creativeid').valid && campaignForm.get('creativeid').touched">Please enter the Creative ID</span>
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="center">
+                        <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                          <span>Creative content. </span>
+                        </file-drop>
+                        <div class="upload-table">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Name</th>
+                              </tr>
+                            </thead>
+                            <tbody class="upload-name-style">
+                              <tr *ngFor="let item of files; let i=index">
+                                <td>
+                                  <strong>{{ item.relativePath }}</strong>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <p>...</p>
+                    </mat-tab>
+                    <mat-tab>
+                      <ng-template mat-tab-label>
+                        <mat-icon>directions_car</mat-icon> Vehicle
+                      </ng-template>
+                      <div class="tab-content row">
+                        <div class="row">
+                          <div class="col-md-12">
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="vehicleid" formControlName="vehicleid" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('vehicleid').valid && campaignForm.get('vehicleid').touched">Please select vehicle id</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="vehiclevin" formControlName="vehiclevin" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('vehiclevin').valid && campaignForm.get('vehiclevin').touched">Please select vehicle vin</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="make" formControlName="make" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('make').valid && campaignForm.get('make').touched">Please select vehicle make</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="model" formControlName="model" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('model').valid && campaignForm.get('model').touched">Please select vehicle model</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="year" formControlName="year" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('year').valid && campaignForm.get('year').touched">Please select vehicle year</span>
+                              </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="color" formControlName="color" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('color').valid && campaignForm.get('color').touched">Please select vehicle color</span>
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="trim" formControlName="trim" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('trim').valid && campaignForm.get('trim').touched">Please select vehicle body</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="vehicleodometer" formControlName="vehicleodometer" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('vehicleodometer').valid && campaignForm.get('vehicleodometer').touched">Please select vehicle odometer</span>
+                              </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="vehicletitle" formControlName="vehicletitle" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('vehicletitle').valid && campaignForm.get('vehicletitle').touched">Please select vehicle title</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="vehicleprice" formControlName="vehicleprice" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('vehicleprice').valid && campaignForm.get('vehicleprice').touched">Please select vehicle price</span>
+                              </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="pacode" formControlName="pacode" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('pacode').valid && campaignForm.get('pacode').touched">Please select PA Code</span>
+                              </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="postalCode" formControlName="postalCode" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('postalCode').valid && campaignForm.get('postalCode').touched">Please select Postal code</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                  
+                          </div>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab>
+                      <ng-template mat-tab-label>
+                        <mat-icon>confirmation_number</mat-icon> Disclaimers
+                      </ng-template>
+                      <div class="tab-content row">
+                      </div>
+                    </mat-tab>
+                  </mat-tab-group>
+            
+              </div>
+              <div class="button-row">
+                <button type="submit" [disabled]="!campaignForm.valid" mat-raised-button color="primary">
+                  <mat-icon>save</mat-icon>
+                </button>
+              </div>
+        </div>
+      
+
+      </div>
+    <!-- end row -->
+
+
+    </div>
+  </form>
+  <!-- end container -->
   </div>
-  <div class="button-row">
-    <button type="submit" [disabled]="!campaignForm.valid" mat-raised-button color="primary">
-      <mat-icon>save</mat-icon>
-    </button>
   </div>
-</form>
+</section>

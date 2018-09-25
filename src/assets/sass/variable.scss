@@ -24,3 +24,8 @@ $font-family: 'Roboto', sans-serif;
   font-weight: normal;
   line-height: 20px;
 }
+
+.mat-tab-body-content {
+  height:unset!important;
+  overflow: hidden !important;
+}

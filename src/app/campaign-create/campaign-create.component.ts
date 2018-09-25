@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';
 import { ApiService } from '../api.service';
 import { of } from 'rxjs/observable/of';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, FormBuilder, FormGroup, FormArray, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-campaign-create',
@@ -38,7 +38,7 @@ export class CampaignCreateComponent implements OnInit {
     vehicleprice: String='';
     pacode: String='';
     postalCode: String='';
-   
+    disclaimers : [String];
     
   constructor(private http: HttpClient, private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
 
@@ -53,10 +53,10 @@ export class CampaignCreateComponent implements OnInit {
       'adid' : [null, Validators.required],
       'adname' : [null, Validators.required],
       'creativeid' : [null, Validators.required],
-      'campaignadtype' : [null, Validators.required],
+      'campaignadtype' : [null],
       'campaignexpdate' : [null, Validators.required],
       'adexpdate' : [null, Validators.required],
-      'publisher' : [null, Validators.required],
+      'publisher' : [null],
       'creativeobject' :  [null],
       'vehicleid':  [null],
       'vehiclevin':  [null],
@@ -69,8 +69,8 @@ export class CampaignCreateComponent implements OnInit {
       'vehicletitle': [null],
       'vehicleprice': [null],
       'pacode': [null, Validators.required],
-      'postalCode': [null, Validators.required]
-
+      'postalCode': [null, Validators.required],
+      'disclaimers': []
     }, err => {
         if(err.status === 401) {
           this.router.navigate(['login']);
@@ -79,6 +79,7 @@ export class CampaignCreateComponent implements OnInit {
   }
 
   onFormSubmit(form:NgForm) {
+    console.log("form", form);
     this.api.postCampaign(form)
       .subscribe(res => {
           let id = res['_id'];

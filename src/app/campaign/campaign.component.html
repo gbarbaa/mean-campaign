@@ -72,38 +72,30 @@
                 <div id="accordion" class="panel-group faq-panel accordion" data-animated="fadeInUp"  >
 
                   <!-- Accordion campaings Begins -->
-                  <div class="panel panel-default" *ngFor="let key of groupedCampaignIds" [class.active]="selectedCampaign === key">
+                  <div class="panel panel-default" *ngFor="let key of groupedCampaignIds; index as i " [class.active]="selectedCampaignIndex === i">
                   
                     <div class="panel-heading" >
                       <!-- Title -->
                       <div href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="panel-active-projects">
-                        <span class="fa fa-bullhorn" style="flex: 18%;"></span>
-                        <h5 class="panel-title">
-                          <a  (click)="selectCampaign(key)">{{groupedCampaigns[key][0].campaignname}}</a>
-                        </h5>
+                          <label class=""  >Campaign</label>
+                        <span class="panel-title">
+                          <a  (click)="selectCampaign(key, i)">{{groupedCampaigns[key][0].campaignname}}</a>
+                        </span>
                       </div>
-                      <div>
-                        <span class="text campaign-title" style="display: inline;">{{groupedCampaigns[key][0].campaignexpdate}}</span>
-                      </div>
+ 
                     </div>
                     <div class="panel-collapse collapse in" id="collapseOne">
                       <!-- Projects Section Begins -->
                       <div class="panel-body">
-                        <div class="panel-project-heading active" *ngFor="let campaign of groupedCampaigns[key]">
+                        <div class="panel-project-heading active" *ngFor="let campaign of groupedCampaigns[key]; index as a" [class.active]="selectedAd === a">
                           <section class="panel-project-content" >
-                            <a [routerLink]="['/campaign-details/', campaign._id]">
-                            <div >
-                              <span class="fa fa-adn" style="flex: 18%"></span>
-                              <span class="text campaign-subtitle" style="display: inline;">{{campaign.adname}}</span>
-                            </div>
-                            <div>
-                              <span class="fa fa-file" style="flex: 18%"></span>
-                              <span class="text campaign-subtitle" style="display: inline;">{{campaign.adid}}</span>
-                            </div>
-                            <div>
-                              <span class="text campaign-title" style="flex: 18%">{{campaign.adexpdate}}</span>
-                            </div>
-                          </a>
+                       <!--     <a [routerLink]="['/campaign-details/', campaign._id]"> -->
+                              <a (click)="selectAd(a, campaign._id)">
+                              <label class=""  aria-owns="mat-input-25">Ad</label>
+                              <div>
+                               <span class="text campaign-subtitle" style="display: inline;">{{campaign.adname}}</span>
+                              </div>
+                            </a>
                           </section>
 
                           <section href="#" class="panel-project-trash active fa fa-trash-o fa-1bx red">
@@ -132,120 +124,262 @@
 
         </div>
         <!-- Sidebar Ends -->
+
+
       </div>
 
+      
       <!-- Right Part -->
-      <div class="col-md-8 col-sm-8">
+      <div class="main-section col-md-8 col-sm-8">
 
-        <!-- Main form -->
-        <div class="mainform" id="mainform">
-          <form name="mainform" id="mainForm" method="post">
-            <div class="row" style="margin-left: 0;">
-              <div class="col-md-10">
-                <div class="row">
+          <div class="mainform" id="mainform">
+            <form [formGroup]="campaignForm" (ngSubmit)="onFormSubmit(campaignForm.value)" >
+              <div class="row" style="margin-left: 0;">
+              <div class="col-md-9">
+                  <div class="row">
+
+                  <mat-form-field class="example-full-width" style="width: 50%;padding-right: 10%;">
+                    <input matInput placeholder="Campaign ID" formControlName="campaignid"
+                           [errorStateMatcher]="matcher">
+                    <mat-error>
+                      <span *ngIf="!campaignForm.get('campaignid').valid && campaignForm.get('campaignid').touched">Please enter Campaign ID</span>
+                    </mat-error>
+                  </mat-form-field>
+                    
+                  <mat-form-field class="example-full-width" style="width: 50%">
+                    <input matInput placeholder="Ad ID" formControlName="adid"
+                           [errorStateMatcher]="matcher">
+                    <mat-error>
+                      <span *ngIf="!campaignForm.get('adid').valid && campaignForm.get('adid').touched">Please enter Ad ID</span>
+                    </mat-error>
+                  </mat-form-field>
+                
+                  </div>
+                  
+                  <div class="row">
+                    <mat-form-field class="example-full-width" style="width: 50%;padding-right: 10%;">
+                      <input matInput placeholder="Campaign Exp. Date" formControlName="campaignexpdate"
+                             [errorStateMatcher]="matcher">
+                      <mat-error>
+                        <span *ngIf="!campaignForm.get('campaignexpdate').valid && campaignForm.get('campaignexpdate').touched">Please enter Campaign Exp. Date</span>
+                      </mat-error>
+                    </mat-form-field>
+                
+                    <mat-form-field class="example-full-width" style="width: 50%">
+                      <textarea matInput placeholder="Ad Exp. Date" formControlName="adexpdate"
+                             [errorStateMatcher]="matcher"></textarea>
+                      <mat-error>
+                        <span *ngIf="!campaignForm.get('adexpdate').valid && campaignForm.get('adexpdate').touched">Please enter Ad Exp. Date</span>
+                      </mat-error>
+                    </mat-form-field>
+                
+                </div>
+              </div>
+                <div class="col-md-3">
+
+                  <label class="mainOptionslbl">Search
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+
+                  <label class="mainOptionslbl">Display
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+
+                  <label class="mainOptionslbl">Social
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+
+                  <label class="mainOptionslbl">Video
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+
+                </div>
               
-                  <input type="text" name="CampaignName" id="CampaignName" placeholder="Campaign Name" class="col-md-6 pull-left input-text"
-                    required >
-                  <input type="text" name="AdName" id="AdName" placeholder="Ad Name" class="col-md-5 pull-right input-text" required>
-                </div>
-                <div class="row">
-                  <input type="text" name="CampaignName" id="CampaignName" placeholder="Campaign Name" class="col-md-6 pull-left input-text"
-                    required>
-                  <input type="text" name="AdName" id="AdName" placeholder="Ad Name" class="col-md-5 pull-right input-text" required>
-                </div>
+
+              <div class="">
+                <div class="devider-line-h devider-line-h-sea-green animated zoomIn visible" data-animation="zoomIn" data-animation-delay="1000"></div>
+
               </div>
-              <div class="col-md-2">
 
-                <label class="mainOptionslbl">One
-                  <input type="checkbox" checked="checked">
-                  <span class="checkmark"></span>
-                </label>
+              <div class="tabs-section col-md-12 pull-left tabs animated fadeInUp visible" data-animation="fadeInUp" data-animation-delay="500">
 
-                <label class="mainOptionslbl">Two
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-                </label>
-
-                <label class="mainOptionslbl">Three
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-                </label>
-
-                <label class="mainOptionslbl">Four
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-                </label>
-
+                  <mat-tab-group>
+                    <mat-tab>
+                      <ng-template mat-tab-label>
+                        <mat-icon>cloud_upload</mat-icon>Creatives
+                      </ng-template>
+                      <div class="tab-content row">
+                        <div class="row">
+                          <div class="col-md-10">
+                  
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Creative ID" formControlName="creativeid" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('creativeid').valid && campaignForm.get('creativeid').touched">Please enter the Creative ID</span>
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="center">
+                        <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                          <span>Creative content. </span>
+                        </file-drop>
+                        <div class="upload-table">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Name</th>
+                              </tr>
+                            </thead>
+                            <tbody class="upload-name-style">
+                              <tr *ngFor="let item of files; let i=index">
+                                <td>
+                                  <strong>{{ item.relativePath }}</strong>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <p>...</p>
+                    </mat-tab>
+                    <mat-tab>
+                      <ng-template mat-tab-label>
+                        <mat-icon>directions_car</mat-icon> Vehicle
+                      </ng-template>
+                      <div class="tab-content row">
+                        <div class="row">
+                          <div class="col-md-12">
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="vehicleid" formControlName="vehicleid" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('vehicleid').valid && campaignForm.get('vehicleid').touched">Please select vehicle id</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="vehiclevin" formControlName="vehiclevin" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('vehiclevin').valid && campaignForm.get('vehiclevin').touched">Please select vehicle vin</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="make" formControlName="make" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('make').valid && campaignForm.get('make').touched">Please select vehicle make</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="model" formControlName="model" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('model').valid && campaignForm.get('model').touched">Please select vehicle model</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="year" formControlName="year" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('year').valid && campaignForm.get('year').touched">Please select vehicle year</span>
+                              </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="color" formControlName="color" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('color').valid && campaignForm.get('color').touched">Please select vehicle color</span>
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="trim" formControlName="trim" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('trim').valid && campaignForm.get('trim').touched">Please select vehicle body</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="vehicleodometer" formControlName="vehicleodometer" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('vehicleodometer').valid && campaignForm.get('vehicleodometer').touched">Please select vehicle odometer</span>
+                              </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="vehicletitle" formControlName="vehicletitle" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('vehicletitle').valid && campaignForm.get('vehicletitle').touched">Please select vehicle title</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                  
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="vehicleprice" formControlName="vehicleprice" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('vehicleprice').valid && campaignForm.get('vehicleprice').touched">Please select vehicle price</span>
+                              </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="pacode" formControlName="pacode" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('pacode').valid && campaignForm.get('pacode').touched">Please select PA Code</span>
+                              </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width col-md-4">
+                              <input matInput placeholder="postalCode" formControlName="postalCode" [errorStateMatcher]="matcher">
+                              <mat-error>
+                                <span *ngIf="!campaignForm.get('postalCode').valid && campaignForm.get('postalCode').touched">Please select Postal code</span>
+                              </mat-error>
+                            </mat-form-field>
+                  
+                  
+                          </div>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab>
+                      <ng-template mat-tab-label>
+                        <mat-icon>confirmation_number</mat-icon> Disclaimers
+                      </ng-template>
+                      <div class="tab-content row">
+                      </div>
+                    </mat-tab>
+                  </mat-tab-group>
+            
+              </div>
+              <div class="button-row">
+                <a mat-raised-button color="primary" [routerLink]="['/campaign-create']">
+                  <mat-icon>add</mat-icon>
+                </a>
+                <button type="submit" [disabled]="!campaignForm.valid" mat-raised-button color="primary" style="height: 36px;margin-left: 20px;"><mat-icon>save</mat-icon></button>
               </div>
             </div>
-          </form>
-
-
+            </form>
         </div>
-        <div class="row">
-
-          <div class="">
-            <div class="devider-line-h devider-line-h-sea-green animated zoomIn visible" data-animation="zoomIn" data-animation-delay="1000"></div>
-
-          </div>
-
-          <!-- Tab with Icon Section -->
-          <div class="col-md-12 pull-left tabs animated fadeInUp visible" data-animation="fadeInUp" data-animation-delay="500">
-
-            <!-- Tab Icon Section -->
-            <ul class="nav nav-tabs myTab">
-              <li class="active">
-                <a href="#mytab1" data-toggle="tab">
-                  <i class="fa fa-cloud-upload-alt"></i> Creatives</a>
-              </li>
-              <li>
-                <a href="#mytab2" data-toggle="tab">
-                  <i class="fa fa-car-alt"></i> Contact</a>
-              </li>
-              <li>
-                <a href="#mytab3" data-toggle="tab">
-                  <i class="fa fa-car-side"></i> Extras</a>
-              </li>
-              <li>
-                <a href="#mytab4" data-toggle="tab">
-                  <i class="fa fa-file-contract"></i> Disclaimers</a>
-              </li>
-            </ul>
-            <!-- Icon Section End-->
-
-            <!-- Content Area Section -->
-            <div class="tab-content">
-              <div class="tab-pane fade in active" id="mytab1">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-                specimen book. when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
-              <div class="tab-pane fade" id="mytab2"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s.</div>
-              <div class="tab-pane fade" id="mytab3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                to make a type specimen book.
-              </div>
-              <div class="tab-pane fade" id="mytab4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                to make a type specimen book.
-              </div>
-            </div>
-            <!-- Content Area Section -->
-          </div>
-          <!-- Tab with Icon Section End-->
-        </div>
+      
 
       </div>
-      <!-- end col-md-8 -->
-
-    </div>
     <!-- end row -->
-  </div>
+    </div>
   <!-- end container -->
+  </div>
 </section>
 
-<div class="button-row">
-  <a mat-raised-button color="primary" [routerLink]="['/campaign-create']">
-    <mat-icon>add</mat-icon>
-  </a>
-</div>

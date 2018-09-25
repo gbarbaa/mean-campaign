@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { FileDropModule } from 'ngx-file-drop';
 
 import {
   MatInputModule,
@@ -15,7 +16,8 @@ import {
   MatButtonModule,
   MatCardModule,
   MatSidenavModule,
-  MatFormFieldModule } from "@angular/material";
+  MatFormFieldModule,
+  MatTabsModule } from "@angular/material";
 
 import { AppComponent } from './app.component';
 import { CampaignComponent } from './campaign/campaign.component';
@@ -97,7 +99,9 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCardModule,
     MatSidenavModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTabsModule,
+    FileDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

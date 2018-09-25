@@ -4559,8 +4559,8 @@ a.list-group-item-danger.active:focus {
 .panel-group {
   margin-bottom: 20px;
   overflow-y: scroll;
-    padding-right: 5px;
-    max-height: 80%;
+  padding-right: 5px;
+  height: 400px;
 }
 .panel-group .panel {
   margin-bottom: 0;
@@ -4590,7 +4590,7 @@ a.list-group-item-danger.active:focus {
   border-left: 6px solid #1b3664;
 }
 
-.panel-project-heading.active {
+.panel.active .panel-project-heading.active {
   /* border: 1px solid #1b3664; */
   border-left: 6px solid #1b3664;
   /* margin-bottom: 15px; */
@@ -4598,6 +4598,14 @@ a.list-group-item-danger.active:focus {
   align-items: center;
   box-shadow: 1px 1px 5px 1px rgba(0,0,0,.12);
   z-index: 999;
+  pointer-events: all;
+}
+.panel.active .panel-project-heading {
+  pointer-events: all;
+}
+
+.panel .panel-project-heading {
+  pointer-events: none;
 }
 
 .panel-project-heading {

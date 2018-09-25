@@ -40,8 +40,6 @@ ul.menu-shop-menu {
 }
 
 
-
-
 .menu-account, .menu-main, .menu-shop-menu {
     list-style-type: none;
     text-align: right;
@@ -67,6 +65,32 @@ li.menu-shop-menu__subitem {
     -webkit-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
+}
+
+.main-section {
+    position: fixed;
+    float: right;
+    right: 0;
+    width: 46%;
+    margin-right: 16%;
+}
+
+.tabs-section {
+    margin-top: 10px
+}
+
+.tab-content {
+    margin-top: 10px;
+}
+
+mat-icon {
+    margin-right: 10px;
+}
+
+.tab-content {
+    margin-top: 15px;
+    overflow: hidden;
+    margin-left: 0;
 }
 
 
@@ -134,9 +158,16 @@ li.menu-shop-menu__subitem {
   
   .button-row {
     margin: 10px 0;
+    bottom: 25%;
+    position: fixed;
   }
 
-
+  @media (min-width: 992px) {
+    .button-row {
+        bottom: 0%;
+      }
+    }
+    
   /*
 Container
 =========================== */
@@ -194,12 +225,18 @@ h5 {
     animation-name: fadeInUp;
 }
 
+.mat-tab-body-content {
+    height:unset!important;
+    overflow: hidden !important;
+}
+
 
 .devider-line-h {
     height: 1px;
     margin: 0 auto auto auto;
     width: 100%;
     background-color: #003366 !important;
+    display: flex;
 }
 
 .left-panel {
@@ -212,7 +249,7 @@ h5 {
     border-right: 1px solid #003366;
 }
 
-.sidebar, .categories, .tags, .archives, .about-us, .recent-posts {
+ .categories, .tags, .archives, .about-us, .recent-posts {
     margin: 40px 0px 50px;
 }
 .dealer-logo {
@@ -223,6 +260,34 @@ h5 {
     display: block;
     float: left;
     width: 100%;
+}
+
+.panel-heading {
+    display: flex;
+}
+
+span.panel-title {
+    display: block;
+}
+
+.panel-project-content {
+    cursor: pointer;
+}
+
+.panel-active-projects > label {
+    font-size: 11px;
+}
+
+.panel-project-content > a > label {
+    font-size: 11px;
+}
+
+.panel-project-heading {
+    border-left: 6px solid transparent;
+    display: flex;
+    align-items: center;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.12);
+    z-index: 999;
 }
 
 .mainform {

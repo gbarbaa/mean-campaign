@@ -61,10 +61,10 @@ export class CampaignEditComponent implements OnInit {
       'vehicleodometer':  [null],
       'vehicletitle': [null],
       'vehicleprice': [null],
-      'pacode': [null, Validators.required],
-      'postalCode': [null, Validators.required],
-      'adexpdate' : [null, Validators.required],
-      'publisher' : [null, Validators.required]
+      'pacode': [null],
+      'postalCode': [null],
+      'adexpdate' : [null],
+      'publisher' : [null]
     });
   }
 
