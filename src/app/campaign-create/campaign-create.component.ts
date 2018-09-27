@@ -70,7 +70,8 @@ export class CampaignCreateComponent implements OnInit {
       'vehicleprice': [null],
       'pacode': [null, Validators.required],
       'postalCode': [null, Validators.required],
-      'disclaimers': []
+      'disclaimers': [null, Validators.required],
+
     }, err => {
         if(err.status === 401) {
           this.router.navigate(['login']);

@@ -158,16 +158,19 @@ mat-icon {
   
   .button-row {
     margin: 10px 0;
-    bottom: 25%;
-    position: fixed;
+    bottom: 1%;
+    position: absolute;
   }
 
-  @media (min-width: 992px) {
-    .button-row {
-        bottom: 0%;
-      }
-    }
-    
+  textarea {
+    height: 150px;
+  }
+
+  .mat-form-field[disabled="true"] {
+    pointer-events: none;
+    color   : lightgray;
+  }
+  
   /*
 Container
 =========================== */
@@ -272,6 +275,7 @@ span.panel-title {
 
 .panel-project-content {
     cursor: pointer;
+    width: 180px;
 }
 
 .panel-active-projects > label {
@@ -323,7 +327,27 @@ span.panel-title {
     user-select: none;
 }
 
+section.panel-project-trash {
+    cursor: pointer;
+    display: none; 
+}
 
+.panel-default.active .panel-project-heading.active > section.panel-project-trash {
+    display: block;
+}
+
+
+.red {
+    color: #e74c3c;
+}
+
+.fa-1bx {
+    font-size: 1.4em;
+}
+
+img.img-responsive.pull-left.blog-image {
+    margin-top: 10%;
+}
 
 /*
 Colors

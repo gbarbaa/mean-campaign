@@ -49,6 +49,7 @@ export class CampaignComponent implements OnInit {
     vehicleprice: String='';
     pacode: String='';
     postalCode: String='';
+    disclaimers: [String];
 
   public valueSearch: string = '';
   public search: string = null;
@@ -129,7 +130,8 @@ export class CampaignComponent implements OnInit {
           'pacode': [null],
           'postalCode': [null],
           'adexpdate' : [null],
-          'publisher' : [null]
+          'publisher' : [null],
+          'disclaimers': [null]
         });
     }
 
@@ -166,7 +168,8 @@ export class CampaignComponent implements OnInit {
           vehicletitle: allCampaigns[cId][ad].vehicletitle,
           vehicleprice: allCampaigns[cId][ad].vehicleprice,
           pacode: allCampaigns[cId][ad].pacode,
-          postalCode: allCampaigns[cId][ad].postalCode
+          postalCode: allCampaigns[cId][ad].postalCode,
+          disclaimers: allCampaigns[cId][ad].disclaimers
           });
     };
 
@@ -238,6 +241,15 @@ export class CampaignComponent implements OnInit {
         );
     };
   
+    deleteCampaign() {
+      this.api.deleteCampaign(this.id)
+        .subscribe(res => {
+          this.router.navigate(['/campaign-details', this.id]);
+          }, (err) => {
+            console.log(err);
+          }
+        );
+    }
 }
 
 export class CampaignDataSource extends DataSource<any> {
