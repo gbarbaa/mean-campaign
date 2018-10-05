@@ -244,9 +244,11 @@
                         </div>
                       </div>
                       <div class="center">
-                        <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                  
+                        <file-drop  headertext="Drop files here"  (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
                           <span>Creative content. </span>
                         </file-drop>
+                 
                         <div class="upload-table">
                           <table class="table">
                             <thead>
@@ -355,36 +357,36 @@
                                     <span *ngIf="!campaignForm.get('vehicleodometer').valid && campaignForm.get('vehicleodometer').touched">Please select Vehicle Odometer</span>
                                   </mat-error>
                                 </mat-form-field>
-
-
-                  
                   
                           </div>
                         </div>
                       </div>
                     </mat-tab>
                     <mat-tab>
-                        <ng-template mat-tab-label>
-                          <mat-icon>confirmation_number</mat-icon> Disclaimers
-                        </ng-template>
-                        <div class="tab-content row">
-                          <div class="row">
-                            <div class="col-md-10">
-                              <label></label>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-10">
-                              <mat-form-field class="example-full-width col-md-12">
-                                <textarea rows="4" cols="50" matInput placeholder="disclaimers" formControlName="disclaimers" [errorStateMatcher]="matcher"></textarea>
-                                <mat-error>
-                                  <span *ngIf="!campaignForm.get('disclaimers').valid && campaignForm.get('disclaimers').touched">Please enter disclaimers</span>
-                                </mat-error>
-                              </mat-form-field>
-                            </div>
+                      <ng-template mat-tab-label>
+                        <mat-icon>confirmation_number</mat-icon> Disclaimers
+                      </ng-template>
+                      <div class="tab-content row">
+                        <div class="row">
+                          <div class="col-md-10">
+                            <label></label>
                           </div>
                         </div>
-                      </mat-tab>
+                        <div class="row disclaimers">
+                          <div class="col-md-10">
+                    
+                            <div formArrayName="disclaimers" *ngFor="let disc of rows.controls; let i = index;">
+                              <div [formGroupName]="i">
+                                <textarea  type="string" formControlName="disclaimer" placeholder="Disclaimer"></textarea>
+                              </div>
+                            </div>
+                            <button type="button" (click)="addRow()">Add Disclaimer</button>
+                            <button type="button" (click)="removeEmptyRows()" style="margin-left: 20px;">Reset</button>
+                    
+                          </div>
+                        </div>
+                      </div>
+                    </mat-tab>
                   </mat-tab-group>
             
               </div>

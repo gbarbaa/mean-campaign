@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var subSchema = mongoose.Schema({
+  disclaimer: String
+},{ _id : false });
+
 var CampaignSchema = new Schema({
     dealerid: String,
     dealerName: String,
@@ -12,7 +16,7 @@ var CampaignSchema = new Schema({
     campaignexpdate: Date,
     adexpdate: Date,
     campaignadtype: String,
-    creativeobject: Object,
+    creativeobject: { data: Buffer, contentType: String },
     vehicleid: String,
     vehiclevin: String,
     make: String,
@@ -26,7 +30,7 @@ var CampaignSchema = new Schema({
     pacode: String,
     postalCode: String,
     publisher: String,
-    disclaimers: [String],
+    disclaimers : [subSchema],
     updated_date: { type: Date, default: Date.now }
   });
 

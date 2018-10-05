@@ -4,8 +4,13 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';
 import { ApiService } from '../api.service';
+import * as _ from "lodash";
 import { of } from 'rxjs/observable/of';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, FormArray, NgForm, Validators } from '@angular/forms';
+import {AbstractControl,  FormControl, FormGroupDirective, FormBuilder, FormGroup, FormArray, NgForm, Validators } from '@angular/forms';
+
+import { BehaviorSubject } from 'rxjs';
+
+import { Disclaimers } from '../lib/service/data/disclaimers.model';
 
 @Component({
   selector: 'app-campaign-create',
@@ -26,21 +31,28 @@ export class CampaignCreateComponent implements OnInit {
   adexpdate:string='';
   publisher:string='';
   creativeobject: Object='';
-    vehicleid: String='';
-    vehiclevin: String='';
-    make: String='';
-    model: String='';
-    year: String='';
-    color: String='';
-    trim: String='';
-    vehicleodometer: String='';
-    vehicletitle: String='';
-    vehicleprice: String='';
-    pacode: String='';
-    postalCode: String='';
-    disclaimers : [String];
+  vehicleid: String='';
+  vehiclevin: String='';
+  make: String='';
+  model: String='';
+  year: String='';
+  color: String='';
+  trim: String='';
+  vehicleodometer: String='';
+  vehicletitle: String='';
+  vehicleprice: String='';
+  pacode: String='';
+  postalCode: String='';
+  disclaimers : [{
+    disclaimer: String;
+  }];
+
+  data: Disclaimers[] = [ { disclaimer: new String } ];
+  dataSource = new BehaviorSubject<AbstractControl[]>([]);
+  displayColumns = ['disclaimer'];
+  rows: FormArray = this.fb.array([]);
     
-  constructor(private http: HttpClient, private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
+  constructor(private http: HttpClient, private router: Router, private api: ApiService, private formBuilder: FormBuilder, private fb: FormBuilder) { }
 
 
   ngOnInit() {
@@ -70,18 +82,22 @@ export class CampaignCreateComponent implements OnInit {
       'vehicleprice': [null],
       'pacode': [null, Validators.required],
       'postalCode': [null, Validators.required],
-      'disclaimers': [null, Validators.required],
+      'disclaimers':  this.rows
 
     }, err => {
         if(err.status === 401) {
           this.router.navigate(['login']);
         }
     });
+
+    this.data.forEach((d: Disclaimers) => this.addRow(d, false));
+    this.updateView();
+
   }
 
-  onFormSubmit(form:NgForm) {
-    console.log("form", form);
-    this.api.postCampaign(form)
+  onFormSubmit(formc:NgForm) {
+
+    this.api.postCampaign(formc)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/campaign-details', id]);
@@ -90,4 +106,27 @@ export class CampaignCreateComponent implements OnInit {
         });
   }
 
+  addRow(d?: Disclaimers, noUpdate?: boolean) {
+    const row = this.fb.group({
+      'disclaimer'   : [d && d.disclaimer ? d.disclaimer : null, []]
+    });
+    this.rows.push(row);
+    if (!noUpdate) { this.updateView(); }
+  }
+
+  updateView() {
+    this.dataSource.next(this.rows.controls);
+  }
+
+  removeEmptyRows() {
+
+    this.data = _.filter(this.data, discs=>discs.disclaimer != null);
+    this.data = _.filter(this.data, discs=>discs.disclaimer.length > 0);
+    while (this.rows.length !== 0) {
+      this.rows.removeAt(0);
+    }
+    this.data.forEach((d: Disclaimers) => this.addRow(d, false));
+    this.updateView();
+    this.campaignForm.updateValueAndValidity;
+  }
 }

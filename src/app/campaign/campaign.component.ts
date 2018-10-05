@@ -8,8 +8,11 @@ import * as _ from "lodash";
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import {AbstractControl,  FormControl, FormGroupDirective, FormBuilder, FormGroup, FormArray, NgForm, Validators } from '@angular/forms';
 
+import { BehaviorSubject } from 'rxjs';
+
+import { Disclaimers } from '../lib/service/data/disclaimers.model';
 
 import { UploadEvent, UploadFile } from 'ngx-file-drop';
 
@@ -36,20 +39,22 @@ export class CampaignComponent implements OnInit {
   campaignexpdate:string='';
   adexpdate:string='';
   publisher:string='';
-  creativeobject: Object='';
-    vehicleid: String='';
-    vehiclevin: String='';
-    make: String='';
-    model: String='';
-    year: String='';
-    color: String='';
-    trim: String='';
-    vehicleodometer: String='';
-    vehicletitle: String='';
-    vehicleprice: String='';
-    pacode: String='';
-    postalCode: String='';
-    disclaimers: [String];
+  creativeobject: Object;
+  vehicleid: String='';
+  vehiclevin: String='';
+  make: String='';
+  model: String='';
+  year: String='';
+  color: String='';
+  trim: String='';
+  vehicleodometer: String='';
+  vehicletitle: String='';
+  vehicleprice: String='';
+  pacode: String='';
+  postalCode: String='';
+  disclaimers:  [{
+    disclaimer: String;
+  }];
 
   public valueSearch: string = '';
   public search: string = null;
@@ -58,8 +63,10 @@ export class CampaignComponent implements OnInit {
   groupedCampaigns: any;
   private selectedCampaign: Campaign;
 
-  displayedColumns = ['campaignname', 'adname', 'campaignexpdate', 'adexpdate'];
-  dataSource = new CampaignDataSource(this.api);
+  data: Disclaimers[] = [ { disclaimer: new String } ];
+  dataSource = new BehaviorSubject<AbstractControl[]>([]);
+  displayColumns = ['disclaimer'];
+  rows: FormArray = this.fb.array([]);
 
 
   constructor(
@@ -67,7 +74,8 @@ export class CampaignComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private http: HttpClient,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private fb: FormBuilder
         
     ){
       this.activeRoute.queryParams.subscribe(params => {
@@ -81,58 +89,59 @@ export class CampaignComponent implements OnInit {
 
     ngOnInit() {
 
-    this.api.getCampaigns()
+      this.api.getCampaigns()
 
-      .subscribe(res => {
+        .subscribe(res => {
 
         this.campaigns = res;
 
-          this.groupedCampaigns = _.groupBy(this.campaigns, campaign=>campaign.campaignid);
+        this.groupedCampaigns = _.groupBy(this.campaigns, campaign=>campaign.campaignid);
 
-          this.groupedCampaignIds = Object.keys(this.groupedCampaigns);
+        this.groupedCampaignIds = Object.keys(this.groupedCampaigns);
 
-          console.log("campaigns", this.campaigns);
-          console.log("groupedCampaigns", this.groupedCampaigns);
-          console.log("groupedCampaignIds", this.groupedCampaignIds[0]);
-          this.selectedCampaign =  this.groupedCampaignIds[0];
+        this.selectedCampaign =  this.groupedCampaignIds[0];
 
-          this.getCampaign(this.groupedCampaigns, this.groupedCampaignIds[0], 0);
+        this.data = this.groupedCampaigns[this.groupedCampaignIds[0]][0].disclaimers;
+      
+        this.data.forEach((d: Disclaimers) => this.addRow(d, false));
+        
+        this.getCampaign(this.groupedCampaigns, this.groupedCampaignIds[0], 0);
 
-        }, err => {
-          console.log(err);
-          if(err.status === 401) {
-            this.router.navigate(['login']);
-          }
-        });
+      }, err => {
+        console.log(err);
+        if(err.status === 401) {
+          this.router.navigate(['login']);
+        }
+      });
 
- 
-        this.campaignForm = this.formBuilder.group({
-          'dealerid' : [null],
-          'dealerName' : [null],
-          'campaignid' : [null, Validators.required],
-          'campaignname' : [null, Validators.required],
-          'adid' : [null, Validators.required],
-          'adname' : [null, Validators.required],
-          'creativeid' : [null, Validators.required],
-          'campaignadtype' : [null],
-          'campaignexpdate' : [null, Validators.required],
-          'creativeobject' :  [null],
-          'vehicleid':  [null, Validators.required],
-          'vehiclevin':  [null, Validators.required],
-          'make':  [null, Validators.required],
-          'model':  [null, Validators.required],
-          'year':  [null, Validators.required],
-          'color':  [null, Validators.required],
-          'trim':  [null, Validators.required],
-          'vehicleodometer':  [null],
-          'vehicletitle': [null],
-          'vehicleprice': [null],
-          'pacode': [null],
-          'postalCode': [null],
-          'adexpdate' : [null],
-          'publisher' : [null],
-          'disclaimers': [null]
-        });
+      this.campaignForm = this.formBuilder.group({
+        'dealerid' : [null],
+        'dealerName' : [null],
+        'campaignid' : [null, Validators.required],
+        'campaignname' : [null, Validators.required],
+        'adid' : [null, Validators.required],
+        'adname' : [null, Validators.required],
+        'creativeid' : [null, Validators.required],
+        'campaignadtype' : [null],
+        'campaignexpdate' : [null, Validators.required],
+        'adexpdate' : [null, Validators.required],
+        'publisher' : [null],
+        'creativeobject' :  [null],
+        'vehicleid':  [null],
+        'vehiclevin':  [null],
+        'make':  [null, Validators.required],
+        'model':  [null, Validators.required],
+        'year':  [null, Validators.required],
+        'color':  [null, Validators.required],
+        'trim':  [null],
+        'vehicleodometer':  [null],
+        'vehicletitle': [null],
+        'vehicleprice': [null],
+        'pacode': [null, Validators.required],
+        'postalCode': [null, Validators.required],
+        'disclaimers': this.rows
+      });
+      this.updateView();
     }
 
     
@@ -141,8 +150,8 @@ export class CampaignComponent implements OnInit {
     private selectedAd = 0;
 
     getCampaign(allCampaigns, cId, ad) {
-      console.log("id", allCampaigns);
-      
+
+      console.log("allc", allCampaigns)
         this.id = allCampaigns[cId][ad]._id;
         this.campaignForm.setValue({
           dealerid: allCampaigns[cId][ad].dealerid,
@@ -156,7 +165,7 @@ export class CampaignComponent implements OnInit {
           campaignexpdate: allCampaigns[cId][ad].campaignexpdate,
           adexpdate: allCampaigns[cId][ad].adexpdate,
           publisher: allCampaigns[cId][ad].publisher,
-          creativeobject: allCampaigns[cId][ad].creativeobject,
+          creativeobject: this.files,
           vehicleid: allCampaigns[cId][ad].vehicleid,
           vehiclevin: allCampaigns[cId][ad].vehiclevin,
           make: allCampaigns[cId][ad].make,
@@ -169,23 +178,22 @@ export class CampaignComponent implements OnInit {
           vehicleprice: allCampaigns[cId][ad].vehicleprice,
           pacode: allCampaigns[cId][ad].pacode,
           postalCode: allCampaigns[cId][ad].postalCode,
-          disclaimers: allCampaigns[cId][ad].disclaimers
+         disclaimers : allCampaigns[cId][ad].disclaimers
           });
     };
 
      selectCampaign(key, i){
-      console.log("key", key);
-      console.log("i", i);
-      console.log("tc", this.campaigns);
+
       this.selectedCampaign = key;
       this.selectedCampaignIndex = i;
       this.selectedAd = 0;
+      this.data = this.groupedCampaigns[key][0].disclaimers;
+      this.removeEmptyRows();
       this.getCampaign(this.groupedCampaigns, key, this.selectedAd );
     };
 
     selectAd(a, i){
-      console.log("a", a);
-      console.log("i", i);
+
       this.selectedAd = a;
       this.getCampaign(this.groupedCampaigns, this.selectedCampaign, this.selectedAd );
     };
@@ -199,6 +207,30 @@ export class CampaignComponent implements OnInit {
       this.router.navigate(['login']);
     };
 
+    addRow(d?: Disclaimers, noUpdate?: boolean) {
+      const row = this.fb.group({
+        'disclaimer'   : [d && d.disclaimer ? d.disclaimer : null, []]
+      });
+      this.rows.push(row);
+      if (!noUpdate) { this.updateView(); }
+    }
+
+    removeEmptyRows() {
+
+      this.data = _.filter(this.data, discs=>discs.disclaimer != null);
+      this.data = _.filter(this.data, discs=>discs.disclaimer.length > 0);
+      while (this.rows.length !== 0) {
+        this.rows.removeAt(0);
+      }
+      this.data.forEach((d: Disclaimers) => this.addRow(d, false));
+      this.updateView();
+      this.campaignForm.updateValueAndValidity;
+    }
+  
+    updateView() {
+      this.dataSource.next(this.rows.controls);
+    }
+
     public files: UploadFile[] = [];
   
     public dropped(event: UploadEvent) {
@@ -211,13 +243,17 @@ export class CampaignComponent implements OnInit {
           fileEntry.file((file: File) => {
   
             // Here you can access the real file
-            console.log(droppedFile.relativePath, file);
+            console.log("file", droppedFile.relativePath, file);
+            this.campaignForm.controls['creativeobject'].setValue(file);
+            this.campaignForm.updateValueAndValidity;
   
           });
         } else {
           // It was a directory (empty directories are added, otherwise only files)
           const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-          console.log(droppedFile.relativePath, fileEntry);
+          console.log("folder", droppedFile.relativePath, fileEntry);
+          this.campaignForm.controls['creativeobject'].setValue(fileEntry);
+          this.campaignForm.updateValueAndValidity;
         }
       }
     };

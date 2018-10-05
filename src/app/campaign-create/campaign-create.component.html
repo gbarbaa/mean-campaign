@@ -361,31 +361,18 @@
                             <label></label>
                           </div>
                         </div>
-                        <div class="row">
+                        <div class="row disclaimers">
                           <div class="col-md-10">
-
-   
-                           <mat-form-field class="example-full-width col-md-12">
-                              <textarea rows="4" cols="50" matInput placeholder="disclaimers" formControlName="disclaimers" [errorStateMatcher]="matcher"></textarea>
-                              <mat-error>
-                                <span *ngIf="!campaignForm.get('disclaimers').valid && campaignForm.get('disclaimers').touched">Please enter disclaimers</span>
-                              </mat-error>
-                            </mat-form-field>
-                         
-<!--                    
-                          <form [formGroup]="form"> 
-                            <div formArrayName="disclaimers" *ngFor="let disc of rows; let i = index;">
-                                <div [formGroupName]="i">
-                                  <input type="string" formControlName="disclaimer" placeholder="Disclaimer(s)">
-                                </div>
+                   
+                            <div formArrayName="disclaimers" *ngFor="let disc of rows.controls; let i = index;">
+                              <div [formGroupName]="i">
+                                <textarea type="string" formControlName="disclaimer" placeholder="disclaimer"></textarea>
                               </div>
-                            
-                              <button type="button" (click)="addRow()">Add Disclaimer</button>
-                              <pre>{{ form.value | json }}</pre>
-
-                           </form> 
-                          -->
-      
+                            </div>
+                            <button type="button" (click)="addRow()">Add Disclaimer</button>
+                            <button type="button" (click)="removeEmptyRows()" style="margin-left: 20px;">Reset</button>
+                     
+                  
                           </div>
                         </div>
                       </div>

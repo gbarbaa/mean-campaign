@@ -4,6 +4,7 @@ const Campaign = require('../../../models/Campaign.js');
 exports.findAll = (req, res) => {
     Campaign.find()
     .then(campaigns => {
+        JSON.stringify(campaigns);
         res.send(campaigns);
     }).catch(err => {
         res.status(500).send({
@@ -21,6 +22,7 @@ exports.findOne = (req, res) => {
                 message: "Campaign not found with creativeid " + req.params.creativeid
             });            
         }
+        JSON.stringify(campaign);
         res.send(campaign);
     }).catch(err => {
         if(err.kind === 'ObjectId') {

@@ -163,7 +163,8 @@ mat-icon {
   }
 
   textarea {
-    height: 150px;
+    height: 50px;
+    min-width: 100%;
   }
 
   .mat-form-field[disabled="true"] {
@@ -347,6 +348,13 @@ section.panel-project-trash {
 
 img.img-responsive.pull-left.blog-image {
     margin-top: 10%;
+}
+
+.disclaimers {
+    max-height: 200px;
+    overflow-y: scroll;
+    display: inline-block;
+    width: 100%;
 }
 
 /*
